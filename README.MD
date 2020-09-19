@@ -1,8 +1,6 @@
 # switchOS v0.2.1 Fork from https://github.com/PlayingKarrde/switchOS
 
-![switchOS Pegasus theme](https://i.imgur.com/4EUrWRV.jpg)
-
-![switchOS Pegasus theme](https://i.imgur.com/yFCqOaY.png)
+<img src="https://raw.githubusercontent.com/dragoonDorise/switchOS/master/preview.jpg">
 
 ## switchOS theme for Pegasus Frontend Retroid Pocket 2 Edition
 
