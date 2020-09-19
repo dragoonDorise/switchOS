@@ -7,7 +7,7 @@ import "qrc:/qmlutils" as PegasusUtils
 ListView {
     id: platformLayout
     anchors.fill: parent
-    spacing: vpx(14)
+    spacing: vpx(28)
     orientation: ListView.Horizontal
     
     displayMarginBeginning: vpx(107)
@@ -48,8 +48,8 @@ ListView {
             id: wrapper
             property bool selected: ListView.isCurrentItem
 
-            width: vpx(256)
-            height: vpx(256)
+            width: vpx(512)
+            height: vpx(512)
             color: eslogo.source ? "#cccccc" : Utils.getPlatformColor(modelData.shortName)
 
             Image {
@@ -98,12 +98,12 @@ ListView {
             Text {
                 id: platformTitle
                 width: vpx(512)
-                x: vpx(-128)
-                y: vpx(-46)
+                x: vpx(0)
+                y: vpx(-64)
                 text: modelData.name
                 color: theme.accent
                 font.family: titleFont.name
-                font.pixelSize: vpx(22)
+                font.pixelSize: vpx(44)
                 elide: Text.ElideRight
                 horizontalAlignment: Text.AlignHCenter
 
@@ -114,8 +114,8 @@ ListView {
             HighlightBorder
             {
                 id: highlightBorder
-                width: vpx(274)
-                height: vpx(274)
+                width: vpx(534)
+                height: vpx(534)
 
                 x: vpx(-9)
                 y: vpx(-9)

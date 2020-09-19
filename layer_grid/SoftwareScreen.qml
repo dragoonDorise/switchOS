@@ -42,14 +42,14 @@ FocusScope
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.right: parent.right
-            height: vpx(88)
+            height: vpx(160)
             z: 5
 
             Image
             {
                 id: headerIcon
-                width: vpx(44)
-                height: vpx(44)
+                width: vpx(80)
+                height: vpx(80)
                 source: "../assets/images/allsoft_icon.svg"
                 sourceSize.width: vpx(128)
                 sourceSize.height: vpx(128)
@@ -67,7 +67,7 @@ FocusScope
                     height: parent.height
                     verticalAlignment: Text.AlignVCenter
                     font.family: titleFont.name
-                    font.pixelSize: vpx(22)
+                    font.pixelSize: vpx(44)
                     font.bold: true
                     anchors {
                         left: parent.right; leftMargin: vpx(12)
@@ -137,8 +137,8 @@ FocusScope
             anchors.right: parent.right;
             anchors.bottom: parent.bottom
 
-            cellWidth: vpx(184)
-            cellHeight: vpx(184)
+            cellWidth: vpx(360)
+            cellHeight: vpx(360)
             preferredHighlightBegin: vpx(99)
             preferredHighlightEnd: vpx(470)
             highlightRangeMode: ListView.StrictlyEnforceRange // Highlight never moves outside the range
@@ -159,8 +159,8 @@ FocusScope
                 {
                     id: delegateContainer
                     property bool selected: delegateContainer.GridView.isCurrentItem
-                    width: vpx(174)
-                    height: vpx(174)
+                    width: vpx(346)
+                    height: vpx(346)
                     z: selected ? 10 : 0
 
 
@@ -261,7 +261,7 @@ FocusScope
                             height: parent.height
                             font.family: titleFont.name
                             color: theme.text//"white"
-                            font.pixelSize: vpx(14)
+                            font.pixelSize: vpx(42)
                             font.bold: true
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
@@ -276,7 +276,7 @@ FocusScope
                     Rectangle {
                         id: titleBubble
                         width: gameTitle.contentWidth + vpx(54)
-                        height: vpx(44)
+                        height: vpx(64)
                         color: "white"
                         radius: vpx(4)
                         
@@ -294,12 +294,12 @@ FocusScope
                             id: gameTitle                        
                             text: modelData.title
                             color: theme.accent
-                            font.pixelSize: vpx(18)
+                            font.pixelSize: vpx(38)
                             font.bold: true
                             font.family: titleFont.name
                             
                             anchors { 
-                                top: parent.top; topMargin: vpx(8)
+                                top: parent.top; topMargin: vpx(16)
                                 left: parent.left; leftMargin: vpx(27)
                             }
                             
@@ -320,8 +320,8 @@ FocusScope
                     HighlightBorder
                     {
                         id: highlightBorder
-                        width: vpx(188)
-                        height: vpx(188)
+                        width: vpx(360)
+                        height: vpx(360)
 
                         x: vpx(-7)
                         y: vpx(-7)

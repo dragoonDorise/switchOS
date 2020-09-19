@@ -1,29 +1,21 @@
-# switchOS v0.2.1
+# switchOS v0.2.1 Fork from https://github.com/PlayingKarrde/switchOS
 
 ![switchOS Pegasus theme](https://i.imgur.com/4EUrWRV.jpg)
 
 ![switchOS Pegasus theme](https://i.imgur.com/yFCqOaY.png)
 
-## switchOS theme for Pegasus Frontend
+## switchOS theme for Pegasus Frontend Retroid Pocket 2 Edition
 
 A simple theme that aims to recreate the experience of Nintendo's Switch console. switchOS is a theme for [Pegasus Frontend](http://pegasus-frontend.org/).
 
-Platform logos courtesy of [lilbud](https://github.com/lilbud/es-theme-switch).
+All thanks to [Seth Powell](https://github.com/PlayingKarrde) and his work creating swithOS 
 
 ## Installation
+1 Follow this [instructions](https://github.com/dragoonDorise/switchOS)
+2 Create a themes folder in your SD Card ( formatted as internal ) in the pegasus-frontend folder, then create a new folder inside themes, switchOS:
+  
+  /pegasus-frontend/themes/switchOS
 
-Simply download the theme and place it in your [Pegasus theme directory](http://pegasus-frontend.org/docs/user-guide/installing-themes/) under a folder called switchOS.
+3 Copy the contents of this repository
 
-
-## Version history
-v0.2.2
-- Fixed bottom bar alignment on non-16:9 screens
-
-v0.2.1
-- Removed Qt.QML inclusion as it apparently is no longer supported
-
-v0.2
-- Adding new platform logos courtesy of [lilbud](https://github.com/lilbud/es-theme-switch)
-
-v0.1
-- Initial release
+4 Open Pegasus with mouse mode off, Settings, General -> Theme and select swithOS, press B until you are at your home screen

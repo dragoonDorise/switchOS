@@ -65,7 +65,7 @@ FocusScope
             x: parent.width - contentWidth - vpx(55)
             y: vpx(55)
             color: theme.text
-            font.pixelSize: vpx(20)
+            font.pixelSize: vpx(40)
             horizontalAlignment: Text.Right
         }
 
