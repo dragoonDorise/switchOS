@@ -32,7 +32,7 @@ FocusScope {
     Item {
         id: buttonContainer
         width: parent.width
-        height: vpx(100)
+        height: (isHandheld) ? vpx(100) : vpx(20)
         anchors {
           bottom: parent.bottom
           bottomMargin: vpx(18)
@@ -40,11 +40,11 @@ FocusScope {
 
         Image {
           id: button1
-          height: vpx(48)
+          height: (isHandheld) ? vpx(48) : vpx(24)
           width: height
           source: "../assets/images/controller/"+ processButtonArt(api.keys.accept) + ".svg"
-          sourceSize.width: vpx(64)
-          sourceSize.height: vpx(64)
+          sourceSize.width: (isHandheld) ? vpx(64) : vpx(32)
+          sourceSize.height: (isHandheld) ? vpx(64) : vpx(32)
           anchors {
             right: button1Txt.left
             rightMargin: vpx(5)
@@ -66,7 +66,7 @@ FocusScope {
             id: txt1
             text: buttonText1
             color: theme.text
-            font.pixelSize: vpx(36)
+            font.pixelSize: (isHandheld) ? vpx(36) : vpx(18)
             font.family: titleFont.name
             font.bold: true
           }
@@ -78,11 +78,11 @@ FocusScope {
 
         Image {
           id: button2
-          height: vpx(48)
+          height: (isHandheld) ? vpx(48) : vpx(24)
           width: height
           source: "../assets/images/controller/"+ processButtonArt(api.keys.cancel) + ".svg"
-          sourceSize.width: vpx(64)
-          sourceSize.height: vpx(64)
+          sourceSize.width: (isHandheld) ? vpx(64) : vpx(32)
+          sourceSize.height: (isHandheld) ? vpx(64) : vpx(32)
           anchors {
             right: button2Txt.left
             rightMargin: vpx(5)
@@ -106,7 +106,7 @@ FocusScope {
             id: txt2
             text: buttonText2
             color: theme.text
-            font.pixelSize: vpx(36)
+            font.pixelSize: (isHandheld) ? vpx(36) : vpx(18)
             font.family: titleFont.name
             font.bold: true
           }

@@ -41,15 +41,15 @@ FocusScope
             id: topBar
             anchors.left: parent.left
             anchors.top: parent.top
-            anchors.right: parent.right
-            height: vpx(160)
+            anchors.right: parent.right            
+            height: (isHandheld) ? vpx(160) : vpx(88)            
             z: 5
 
             Image
             {
                 id: headerIcon
-                width: vpx(80)
-                height: vpx(80)
+                width: (isHandheld) ? vpx(80) : vpx(44)
+                height: (isHandheld) ? vpx(80) : vpx(44)
                 source: "../assets/images/allsoft_icon.svg"
                 sourceSize.width: vpx(128)
                 sourceSize.height: vpx(128)
@@ -67,7 +67,7 @@ FocusScope
                     height: parent.height
                     verticalAlignment: Text.AlignVCenter
                     font.family: titleFont.name
-                    font.pixelSize: vpx(44)
+                    font.pixelSize: (isHandheld) ? vpx(44) : vpx(22)
                     font.bold: true
                     anchors {
                         left: parent.right; leftMargin: vpx(12)
@@ -137,8 +137,8 @@ FocusScope
             anchors.right: parent.right;
             anchors.bottom: parent.bottom
 
-            cellWidth: vpx(360)
-            cellHeight: vpx(360)
+            cellWidth: (isHandheld) ? vpx(360) : vpx(184)
+            cellHeight: (isHandheld) ? vpx(360) : vpx(184)
             preferredHighlightBegin: vpx(99)
             preferredHighlightEnd: vpx(470)
             highlightRangeMode: ListView.StrictlyEnforceRange // Highlight never moves outside the range
@@ -159,8 +159,8 @@ FocusScope
                 {
                     id: delegateContainer
                     property bool selected: delegateContainer.GridView.isCurrentItem
-                    width: vpx(346)
-                    height: vpx(346)
+                    width: (isHandheld) ? vpx(346) : vpx(174)
+                    height: (isHandheld) ? vpx(346) : vpx(174)
                     z: selected ? 10 : 0
 
 
@@ -261,7 +261,7 @@ FocusScope
                             height: parent.height
                             font.family: titleFont.name
                             color: theme.text//"white"
-                            font.pixelSize: vpx(42)
+                            font.pixelSize: (isHandheld) ? vpx(42) : vpx(12)
                             font.bold: true
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
@@ -276,7 +276,7 @@ FocusScope
                     Rectangle {
                         id: titleBubble
                         width: gameTitle.contentWidth + vpx(54)
-                        height: vpx(64)
+                        height: (isHandheld) ? vpx(64) : vpx(44)
                         color: "white"
                         radius: vpx(4)
                         
@@ -294,12 +294,12 @@ FocusScope
                             id: gameTitle                        
                             text: modelData.title
                             color: theme.accent
-                            font.pixelSize: vpx(38)
+                            font.pixelSize: (isHandheld) ? vpx(38) : vpx(18)
                             font.bold: true
                             font.family: titleFont.name
                             
                             anchors { 
-                                top: parent.top; topMargin: vpx(16)
+                                top: parent.top; topMargin: (isHandheld) ? vpx(16) : vpx(8)
                                 left: parent.left; leftMargin: vpx(27)
                             }
                             
@@ -320,8 +320,8 @@ FocusScope
                     HighlightBorder
                     {
                         id: highlightBorder
-                        width: vpx(360)
-                        height: vpx(360)
+                        width: (isHandheld) ? vpx(360) : vpx(188)
+                        height: (isHandheld) ? vpx(360) : vpx(188)
 
                         x: vpx(-7)
                         y: vpx(-7)

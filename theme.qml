@@ -15,7 +15,12 @@ FocusScope
     property int collectionIndex: 0
     property int currentGameIndex: 0
     property int screenmargin: vpx(30)
+    property bool isHandheld: (width == 640) ? true : false
 
+
+   
+   
+    
     function modulo(a,n) {
         return (a % n + n) % n;
     }
