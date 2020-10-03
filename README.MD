@@ -1,19 +1,23 @@
-# switchOS v0.2.1 Fork from https://github.com/PlayingKarrde/switchOS
+# switchOS Retroid Pocket 2 Edition
 
 <img src="https://raw.githubusercontent.com/dragoonDorise/switchOS/master/preview.jpg">
 
-## switchOS theme for Pegasus Frontend Retroid Pocket 2 Edition
-
 A simple theme that aims to recreate the experience of Nintendo's Switch console. switchOS is a theme for [Pegasus Frontend](http://pegasus-frontend.org/).
 
-All thanks to [Seth Powell](https://github.com/PlayingKarrde) and his work creating swithOS 
+## Installing Pegasus on the Retroid Pocket 2
+[Guide for dummies](https://github.com/dragoonDorise/pegasus-rp2-metadata)
 
-## Installation
-1 Follow this [instructions](https://github.com/dragoonDorise/switchOS)
-2 Create a themes folder in your SD Card ( formatted as internal ) in the pegasus-frontend folder, then create a new folder inside themes, switchOS:
+## Theme Installation
+
+1 Download the [latest version](https://github.com/dragoonDorise/switchOS/archive/master.zip)
+
+2 Unzip the downloaded file, rename the folder to switchOS-RP2
+
+1 Upload the folder to /pegasus-frontend/themes:
   
-  /pegasus-frontend/themes/switchOS
+  /pegasus-frontend/themes/switchOS-RP2
 
-3 Copy the contents of this repository
+4 Open Pegasus, go to Settings - General - Theme and select switchOS-RP2
 
-4 Open Pegasus with mouse mode off, Settings, General -> Theme and select swithOS, press B until you are at your home screen
+
+- Disclaimer: this theme is a fork of the original [switchOS](https://github.com/PlayingKarrde/switchOS) from PlayingKarrde, and its also using code from this other [fork](https://github.com/valsou/switchOS)
