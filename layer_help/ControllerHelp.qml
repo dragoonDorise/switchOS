@@ -3,9 +3,9 @@ import QtGraphicalEffects 1.0
 
 FocusScope {
   id: root
-  property string buttonText1: showBack ? "Start" : "OK"
+  property string bottomNavButtonText1: showBack ? "Start" : "OK"
   property string controllerButton1: "A"
-  property string buttonText2: "Back"
+  property string bottomNavButtonText2: "Back"
   property string controllerButton2: "B"
 
   property bool showBack: true
@@ -30,7 +30,7 @@ FocusScope {
     
     Image {
       id: button1
-      width: Math.round(screenheight*buttonSize)
+      width: Math.round(screenheight*bottomNavButtonSize)
       height: width
       source: "../assets/images/controller/"+ processButtonArt(api.keys.accept) + ".png"
       sourceSize.width: 64
@@ -56,9 +56,9 @@ FocusScope {
       height: txt1.height
       Text {
         id: txt1
-        text: buttonText1
+        text: bottomNavButtonText1
         color: theme.text
-        font.pixelSize: Math.round(screenheight*buttonText)
+        font.pixelSize: Math.round(screenheight*bottomNavButtonText)
         font.family: titleFont.name
         font.bold: true
       }
@@ -72,7 +72,7 @@ FocusScope {
 
     Image {
       id: button2
-      width: Math.round(screenheight*buttonSize)
+      width: Math.round(screenheight*bottomNavButtonSize)
       height: width
       source: "../assets/images/controller/"+ processButtonArt(api.keys.cancel) + ".png"
       sourceSize.width: 64
@@ -99,9 +99,9 @@ FocusScope {
       height: txt2.height
       Text {
         id: txt2
-        text: buttonText2
+        text: bottomNavButtonText2
         color: theme.text
-        font.pixelSize: Math.round(screenheight*buttonText)
+        font.pixelSize: Math.round(screenheight*bottomNavButtonText)
         font.family: titleFont.name
         font.bold: true
       }

@@ -12,8 +12,8 @@ import "layer_help"
 FocusScope
 {
     id: root
-    property var buttonSize: 0.04
-    property var buttonText: 0.025
+    property var bottomNavButtonSize: 0.04
+    property var bottomNavButtonText: 0.025
     
     property var platformMarginTop: 0.2569
     property var headerMarginTop: 0.0472
