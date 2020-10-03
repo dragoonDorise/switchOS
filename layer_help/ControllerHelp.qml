@@ -30,7 +30,7 @@ FocusScope {
     
     Image {
       id: button1
-      width: Math.round(screenheight*help1)
+      width: Math.round(screenheight*buttonSize)
       height: width
       source: "../assets/images/controller/"+ processButtonArt(api.keys.accept) + ".png"
       sourceSize.width: 64
@@ -58,7 +58,7 @@ FocusScope {
         id: txt1
         text: buttonText1
         color: theme.text
-        font.pixelSize: Math.round(screenheight*help2)
+        font.pixelSize: Math.round(screenheight*buttonText)
         font.family: titleFont.name
         font.bold: true
       }
@@ -72,7 +72,7 @@ FocusScope {
 
     Image {
       id: button2
-      width: Math.round(screenheight*help1)
+      width: Math.round(screenheight*buttonSize)
       height: width
       source: "../assets/images/controller/"+ processButtonArt(api.keys.cancel) + ".png"
       sourceSize.width: 64
@@ -101,7 +101,7 @@ FocusScope {
         id: txt2
         text: buttonText2
         color: theme.text
-        font.pixelSize: Math.round(screenheight*help2)
+        font.pixelSize: Math.round(screenheight*buttonText)
         font.family: titleFont.name
         font.bold: true
       }

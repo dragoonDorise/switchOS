@@ -12,30 +12,30 @@ import "layer_help"
 FocusScope
 {
     id: root
-    property var help1: 0.04
-    property var help2: 0.025
+    property var buttonSize: 0.04
+    property var buttonText: 0.025
     
-    property var ps1: 0.2569
-    property var ps2: 0.0472
-    property var ps3: 0.0833
-    property var ps4: 0.0277
-    property var ps5: 0.3555
+    property var platformMarginTop: 0.2569
+    property var headerMarginTop: 0.0472
+    property var headerLogo: 0.0833
+    property var headerTime: 0.0277
+    property var platformBox: 0.3555
     
-    property var pb1: 0.025
-    property var pb2: 0.03
-    property var pb3: 0.002
+    property var platformText: 0.025
+    property var selectedPlatformTitle: 0.03
+    property var platformBubbleBottom: 0.002
     
     
-    property var sc1: 0.1222
-    property var sc2: 0.0611
-    property var sc3: 0.0416
-    property var sc4: 0.0277
-    property var sc5: 0.1388
+    property var gamesHeaderHeight: 0.1222
+    property var gamesHeaderIcon: 0.0611
+    property var gamesHeaderNavTop: 0.0416
+    property var gamesCategoryTitle: 0.0277
+    property var gamesGridMarginTop: 0.1388
     property var sc6: 0.6527
     property var sc7: 0.0194
-    property var sc8: 0.0611
-    property var sc9: 0.0222
-    property var sc10: 0.0152
+    property var gamesBubbleHeight: 0.0611
+    property var gamesBubbleText: 0.0222
+    property var gamesBubbleTriangleHeight: 0.0152
     
     
     

@@ -89,20 +89,20 @@ FocusScope
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.right: parent.right
-            height: Math.round(screenheight*sc1)
+            height: Math.round(screenheight*gamesHeaderHeight)
             z: 5
 
             Image
             {
                 id: headerIcon
-                width: Math.round(screenheight*sc2)
+                width: Math.round(screenheight*gamesHeaderIcon)
                 height: width
                 source: "../assets/images/allsoft_icon.svg"
                 sourceSize.width: vpx(128)
                 sourceSize.height: vpx(128)
 
                 anchors {
-                    top: parent.top; topMargin: Math.round(screenheight*sc3)
+                    top: parent.top; topMargin: Math.round(screenheight*gamesHeaderNavTop)
                     left: parent.left; leftMargin: vpx(38)
                 }
 
@@ -112,7 +112,7 @@ FocusScope
                     text: currentCollection.name
                     color: theme.text
                     font.family: titleFont.name
-                    font.pixelSize: Math.round(screenheight*sc4)
+                    font.pixelSize: Math.round(screenheight*gamesCategoryTitle)
                     font.bold: true
                     anchors {
                         verticalCenter: headerIcon.verticalCenter
@@ -195,7 +195,7 @@ FocusScope
 
             cellWidth: width / numcolumns
             cellHeight: cellWidth
-            preferredHighlightBegin: Math.round(screenheight*sc5)
+            preferredHighlightBegin: Math.round(screenheight*gamesGridMarginTop)
             preferredHighlightEnd: Math.round(screenheight*sc6)
             highlightRangeMode: ListView.StrictlyEnforceRange // Highlight never moves outside the range
             snapMode: ListView.SnapToItem
@@ -359,7 +359,7 @@ FocusScope
                     Rectangle {
                         id: titleBubble
                         width: gameTitle.contentWidth + vpx(54)
-                        height: Math.round(screenheight*sc8)
+                        height: Math.round(screenheight*gamesBubbleHeight)
                         color: "white"
                         radius: vpx(4)
 
@@ -382,7 +382,7 @@ FocusScope
                             id: gameTitle
                             text: modelData.title
                             color: theme.accent
-                            font.pixelSize: Math.round(screenheight*sc9)
+                            font.pixelSize: Math.round(screenheight*gamesBubbleText)
                             font.bold: true
                             font.family: titleFont.name
 
@@ -398,7 +398,7 @@ FocusScope
                         id: bubbletriangle
                         source: "../assets/images/triangle.svg"
                         width: vpx(17)
-                        height: Math.round(screenheight*sc10)
+                        height: Math.round(screenheight*gamesBubbleTriangleHeight)
                         opacity: titleBubble.opacity
                         x: screenshot.width/2 - width/2
                         anchors.bottom: screenshot.top

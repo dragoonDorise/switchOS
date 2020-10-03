@@ -24,11 +24,11 @@ FocusScope
         id: topbar
 
             
-            height: Math.round(screenheight*ps1)
+            height: Math.round(screenheight*platformMarginTop)
             anchors {
                 left: parent.left; leftMargin: vpx(60)
                 right: parent.right; rightMargin: vpx(60)
-                top: parent.top; topMargin: Math.round(screenheight*ps2)
+                top: parent.top; topMargin: Math.round(screenheight*headerMarginTop)
             }
 
             // Top bar
@@ -40,7 +40,7 @@ FocusScope
                     top: parent.top;
                     left: parent.left;
                 }
-                width: Math.round(screenheight*ps3)
+                width: Math.round(screenheight*headerLogo)
                 height: width
                 source: "../assets/images/profile_icon.png"
                 sourceSize { width: 128; height:128 }
@@ -81,7 +81,7 @@ FocusScope
                     right: parent.right
                 }
                 color: theme.text
-                font.pixelSize: Math.round(screenheight*ps4)
+                font.pixelSize: Math.round(screenheight*headerTime)
                 horizontalAlignment: Text.Right
             }
         }
@@ -98,7 +98,7 @@ FocusScope
                 right: parent.right
                 top: topbar.bottom;
             }
-            height: Math.round(screenheight*ps5)
+            height: Math.round(screenheight*platformBox)
             focus: true
             
         }

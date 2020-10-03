@@ -78,7 +78,7 @@ ListView {
                 horizontalAlignment : Text.AlignHCenter
                 font.family: titleFont.name
                 color: theme.text
-                font.pixelSize: Math.round(screenheight*pb1)
+                font.pixelSize: Math.round(screenheight*platformText)
                 font.bold: true
 
                 anchors.centerIn: parent
@@ -119,12 +119,12 @@ ListView {
                 text: modelData.name
                 color: theme.accent
                 font.family: titleFont.name
-                font.pixelSize: Math.round(screenheight*pb2)
+                font.pixelSize: Math.round(screenheight*selectedPlatformTitle)
                 elide: Text.ElideRight
 
                 anchors {
                     horizontalCenter: eslogo.horizontalCenter
-                    bottom: eslogo.top; bottomMargin: Math.round(screenheight*pb3)
+                    bottom: eslogo.top; bottomMargin: Math.round(screenheight*platformBubbleBottom)
                 }
 
                 opacity: wrapper.ListView.isCurrentItem ? 1 : 0
