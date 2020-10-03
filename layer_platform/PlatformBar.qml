@@ -6,10 +6,10 @@ import "qrc:/qmlutils" as PegasusUtils
 
 ListView {
     id: platformLayout
-    anchors.fill: parent
-    spacing: (isHandheld) ? vpx(28) : vpx(14)
+    //anchors.fill: parent
+    spacing: vpx(14)
     orientation: ListView.Horizontal
-    
+
     displayMarginBeginning: vpx(107)
     displayMarginEnd: vpx(107)
 
@@ -19,11 +19,15 @@ ListView {
     snapMode: ListView.SnapToItem
     highlightMoveDuration: 200
     highlightMoveVelocity: -1
+    keyNavigationWraps: true
 
     onCurrentIndexChanged: {
-      navSound.play()
+      //navSound.play()
       return;
     }
+
+    Keys.onLeftPressed: {  decrementCurrentIndex(); navSound.play(); }
+    Keys.onRightPressed: {  incrementCurrentIndex(); navSound.play();  }
 
     function gotoSoftware()
     {
@@ -36,10 +40,10 @@ ListView {
             event.accepted = true;
             gotoSoftware();
         }
-        
+
     }
 
-    model: api.collections
+    model: allCollections
     delegate: platformBarDelegate
 
     Component {
@@ -48,8 +52,8 @@ ListView {
             id: wrapper
             property bool selected: ListView.isCurrentItem
 
-            width: (isHandheld) ? vpx(512) : vpx(256)
-            height: (isHandheld) ? vpx(512) : vpx(256)
+            width: platformLayout.height//vpx(256)
+            height: width//vpx(256)
             color: eslogo.source ? "#cccccc" : Utils.getPlatformColor(modelData.shortName)
 
             Image {
@@ -61,12 +65,26 @@ ListView {
                 fillMode: Image.PreserveAspectFit
                 source: "../assets/images/logos/" + Utils.processPlatformName(modelData.shortName) + ".png"
                 asynchronous: true
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: parent.top
-                anchors.topMargin: vpx(80)
+                anchors.centerIn: parent
                 antialiasing: true
-                sourceSize { width: 512; height: 512 }
-                visible: !eslogo.source
+                sourceSize { width: 128; height: 128 }
+                visible: eslogo.paintedWidth < 1
+            }
+
+            Text
+            {
+                text: modelData.name
+                width: parent.width
+                horizontalAlignment : Text.AlignHCenter
+                font.family: titleFont.name
+                color: theme.text
+                font.pixelSize: Math.round(screenheight*pb1)
+                font.bold: true
+
+                anchors.centerIn: parent
+                wrapMode: Text.Wrap
+                visible: logo.paintedWidth < 1
+                z: 10
             }
 
             Image {
@@ -79,6 +97,7 @@ ListView {
                 asynchronous: true
                 sourceSize { width: 512; height: 512 }
             }
+
 
             MouseArea {
                 anchors.fill: wrapper
@@ -97,15 +116,16 @@ ListView {
 
             Text {
                 id: platformTitle
-                width: vpx(512)
-                x: (isHandheld) ? vpx(0) : vpx(-128)
-                y: (isHandheld) ? vpx(-64) : vpx(-46)
                 text: modelData.name
                 color: theme.accent
                 font.family: titleFont.name
-                font.pixelSize: (isHandheld) ? vpx(44) : vpx(22)
+                font.pixelSize: Math.round(screenheight*pb2)
                 elide: Text.ElideRight
-                horizontalAlignment: Text.AlignHCenter
+
+                anchors {
+                    horizontalCenter: eslogo.horizontalCenter
+                    bottom: eslogo.top; bottomMargin: Math.round(screenheight*pb3)
+                }
 
                 opacity: wrapper.ListView.isCurrentItem ? 1 : 0
                 Behavior on opacity { NumberAnimation { duration: 75 } }
@@ -114,8 +134,8 @@ ListView {
             HighlightBorder
             {
                 id: highlightBorder
-                width: (isHandheld) ? vpx(534) : vpx(274)
-                height: (isHandheld) ? vpx(534) : vpx(274)
+                width: parent.width + vpx(18)//vpx(274)
+                height: width//vpx(274)
 
                 x: vpx(-9)
                 y: vpx(-9)
@@ -127,6 +147,6 @@ ListView {
         }
     }
 
-    
+
 }
 

@@ -12,15 +12,77 @@ import "layer_help"
 FocusScope
 {
     id: root
+    property var help1: 0.04
+    property var help2: 0.025
+    
+    property var ps1: 0.2569
+    property var ps2: 0.0472
+    property var ps3: 0.0833
+    property var ps4: 0.0277
+    property var ps5: 0.3555
+    
+    property var pb1: 0.025
+    property var pb2: 0.03
+    property var pb3: 0.002
+    
+    
+    property var sc1: 0.1222
+    property var sc2: 0.0611
+    property var sc3: 0.0416
+    property var sc4: 0.0277
+    property var sc5: 0.1388
+    property var sc6: 0.6527
+    property var sc7: 0.0194
+    property var sc8: 0.0611
+    property var sc9: 0.0222
+    property var sc10: 0.0152
+    
+    
+    
+    
     property int collectionIndex: 0
     property int currentGameIndex: 0
     property int screenmargin: vpx(30)
-    property bool isHandheld: (width == 640) ? true : false
+    property real screenwidth: width
+    property real screenheight: height
+    property bool widescreen: ((height/width) < 0.7)
+    property real helpbarheight: Math.round(screenheight*0.1041) // Calculated manually based on mockup
+    property bool darkThemeActive
+    property var allCollections: {
+        let collections = api.collections.toVarArray()
+        collections.unshift({"name": "Favorites", "shortName": "auto-favorites", "games": allFavorites})
+        collections.unshift({"name": "Last Played", "shortName": "auto-lastplayed", "games": filterLastPlayed})
+        collections.unshift({"name": "All Games", "shortName": "auto-allgames", "games": api.allGames})
 
+        return collections
+    }
+    property var currentCollection: allCollections[collectionIndex]
+    property int maximumPlayedGames: {
+        if (allLastPlayed.count >= 17) {
+            return 17
+        }
+        return allLastPlayed.count
+    }
 
-   
-   
-    
+    SortFilterProxyModel {
+        id: allFavorites
+        sourceModel: api.allGames
+        filters: ValueFilter { roleName: "favorite"; value: true; }
+    }
+
+    SortFilterProxyModel {
+        id: allLastPlayed
+        sourceModel: api.allGames
+        filters: ValueFilter { roleName: "lastPlayed"; value: ""; inverted: true; }
+        sorters: RoleSorter { roleName: "lastPlayed"; sortOrder: Qt.DescendingOrder }
+    }
+
+    SortFilterProxyModel {
+        id: filterLastPlayed
+        sourceModel: allLastPlayed
+        filters: IndexFilter { maximumIndex: maximumPlayedGames }
+    }
+
     function modulo(a,n) {
         return (a % n + n) % n;
     }
@@ -35,7 +97,7 @@ FocusScope
 
     function jumpToCollection(idx) {
         api.memory.set('gameCollIndex' + collectionIndex, currentGameIndex); // save game index of current collection
-        collectionIndex = modulo(idx, api.collections.count); // new collection index
+        collectionIndex = modulo(idx, allCollections.length); // new collection index
         currentGameIndex = 0; // Jump to the top of the list each time collection is changed
     }
 
@@ -63,10 +125,10 @@ FocusScope
         launchSfx.play()
     }
 
-    function launchGame()
-    {
-        api.collections.get(collectionIndex).games.get(currentGameIndex).launch();
-    }
+    // function launchGame()
+    // {
+    //     currentGame.launch();
+    // }
 
     // Theme settings
     FontLoader { id: titleFont; source: "fonts/Nintendo_Switch_UI_Font.ttf" }
@@ -102,6 +164,16 @@ FocusScope
             highlight: api.memory.get('themeHighlight') || themeLight.highlight,
             text: api.memory.get('themeText') || themeLight.text,
             button: api.memory.get('themeButton') || themeLight.button
+        }
+    }
+
+    function swapTheme() {
+        if (darkThemeActive) {
+            darkThemeActive = false;
+            theme.main = themeLight.main;
+        } else {
+            darkThemeActive = true;
+            theme.main = themeDark.main;
         }
     }
 
@@ -206,10 +278,9 @@ FocusScope
         {
             left: parent.left; leftMargin: screenmargin
             right: parent.right; rightMargin: screenmargin
-            //top: parent.bott; topMargin: vpx(647)
             bottom: parent.bottom
         }
-        height: vpx(75)
+        height: helpbarheight
 
         Rectangle {
 
@@ -219,7 +290,7 @@ FocusScope
 
         Rectangle {
             anchors.left: parent.left; anchors.right: parent.right
-            height: vpx(1)
+            height: 1
             color: theme.secondary
         }
 
@@ -228,7 +299,7 @@ FocusScope
             width: parent.width
             height: parent.height
             anchors {
-                bottom: parent.bottom; bottomMargin: vpx(12)
+                bottom: parent.bottom;
             }
             showBack: !platformScreen.focus
         }
