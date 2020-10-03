@@ -12,8 +12,8 @@ import "layer_help"
 FocusScope
 {
     id: root
-    property var bottomNavButtonSize: 0.04
-    property var bottomNavButtonText: 0.025
+    property var bottomNavButtonSize: 0.08
+    property var bottomNavButtonText: 0.05
     
     property var platformMarginTop: 0.2569
     property var headerMarginTop: 0.0472
@@ -37,8 +37,8 @@ FocusScope
     property var gamesBubbleText: 0.0222
     property var gamesBubbleTriangleHeight: 0.0152
     
-    
-    
+    property bool searchActive
+    property string searchTerm: ""
     
     property int collectionIndex: 0
     property int currentGameIndex: 0
@@ -117,6 +117,15 @@ FocusScope
         softwareScreen.visible = false;*/
         //platformScreen.focus = true;
     }
+    
+  function toggleSearch() {  
+         searchActive = !searchActive;
+        
+        /*platformScreen.visible = true;
+        softwareScreen.visible = false;*/
+        //platformScreen.focus = true;
+  }  
+    
 
     function playGame()
     {

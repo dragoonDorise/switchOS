@@ -78,6 +78,7 @@ FocusScope
             }
             if (api.keys.isFilters(event)) {
                 event.accepted = true;
+                toggleSearch();                
                 return;
             }
         }
