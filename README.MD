@@ -22,3 +22,6 @@ All thanks to [Seth Powell](https://github.com/PlayingKarrde) and his work creat
   /pegasus-frontend/themes/switchOS-RP2
 
 4 Open Pegasus, go to Settings - General - Theme and select switchOS-RP2
+
+
+- Disclaimer: this theme is a fork of the original [switchOS](https://github.com/PlayingKarrde/switchOS) from PlayingKarrde, and its using code from this other [fork](https://github.com/valsou/switchOS)
