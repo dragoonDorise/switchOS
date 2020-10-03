@@ -12,15 +12,79 @@ import "layer_help"
 FocusScope
 {
     id: root
+    property var bottomNavButtonSize: 0.08
+    property var bottomNavButtonText: 0.05
+    
+    property var platformMarginTop: 0.15
+    property var headerMarginTop: 0.0472
+    property var headerLogo: 0.0833
+    property var headerTime: 0.04
+    property var platformBox: 0.55
+    
+    
+    
+    property var platformText: 0.025
+    property var selectedPlatformTitle: 0.05
+    property var platformBubbleBottom: 0.02
+    
+    
+    property var gamesHeaderHeight: 0.1222
+    property var gamesHeaderIcon: 0.0611
+    property var gamesHeaderNavTop: 0.0416
+    property var gamesCategoryTitle: 0.0277
+    property var gamesGridMarginTop: 0.1388
+    property var sc6: 0.6527
+    property var sc7: 0.0194
+    property var gamesBubbleHeight: 0.0611
+    property var gamesBubbleText: 0.0422
+    property var gamesBubbleTriangleHeight: 0.02
+    
+    property bool searchActive
+    property string searchTerm: ""
+    
     property int collectionIndex: 0
     property int currentGameIndex: 0
     property int screenmargin: vpx(30)
-    property bool isHandheld: (width == 640) ? true : false
+    property real screenwidth: width
+    property real screenheight: height
+    property bool widescreen: ((height/width) < 0.7)
+    property real helpbarheight: Math.round(screenheight*0.1041) // Calculated manually based on mockup
+    property bool darkThemeActive
+    property var allCollections: {
+        let collections = api.collections.toVarArray()
+        collections.unshift({"name": "Favorites", "shortName": "auto-favorites", "games": allFavorites})
+        collections.unshift({"name": "Last Played", "shortName": "auto-lastplayed", "games": filterLastPlayed})
+        collections.unshift({"name": "All Games", "shortName": "auto-allgames", "games": api.allGames})
 
+        return collections
+    }
+    property var currentCollection: allCollections[collectionIndex]
+    property int maximumPlayedGames: {
+        if (allLastPlayed.count >= 17) {
+            return 17
+        }
+        return allLastPlayed.count
+    }
 
-   
-   
-    
+    SortFilterProxyModel {
+        id: allFavorites
+        sourceModel: api.allGames
+        filters: ValueFilter { roleName: "favorite"; value: true; }
+    }
+
+    SortFilterProxyModel {
+        id: allLastPlayed
+        sourceModel: api.allGames
+        filters: ValueFilter { roleName: "lastPlayed"; value: ""; inverted: true; }
+        sorters: RoleSorter { roleName: "lastPlayed"; sortOrder: Qt.DescendingOrder }
+    }
+
+    SortFilterProxyModel {
+        id: filterLastPlayed
+        sourceModel: allLastPlayed
+        filters: IndexFilter { maximumIndex: maximumPlayedGames }
+    }
+
     function modulo(a,n) {
         return (a % n + n) % n;
     }
@@ -35,7 +99,7 @@ FocusScope
 
     function jumpToCollection(idx) {
         api.memory.set('gameCollIndex' + collectionIndex, currentGameIndex); // save game index of current collection
-        collectionIndex = modulo(idx, api.collections.count); // new collection index
+        collectionIndex = modulo(idx, allCollections.length); // new collection index
         currentGameIndex = 0; // Jump to the top of the list each time collection is changed
     }
 
@@ -55,6 +119,15 @@ FocusScope
         softwareScreen.visible = false;*/
         //platformScreen.focus = true;
     }
+    
+  function toggleSearch() {  
+         searchActive = !searchActive;
+        
+        /*platformScreen.visible = true;
+        softwareScreen.visible = false;*/
+        //platformScreen.focus = true;
+  }  
+    
 
     function playGame()
     {
@@ -63,10 +136,10 @@ FocusScope
         launchSfx.play()
     }
 
-    function launchGame()
-    {
-        api.collections.get(collectionIndex).games.get(currentGameIndex).launch();
-    }
+    // function launchGame()
+    // {
+    //     currentGame.launch();
+    // }
 
     // Theme settings
     FontLoader { id: titleFont; source: "fonts/Nintendo_Switch_UI_Font.ttf" }
@@ -102,6 +175,16 @@ FocusScope
             highlight: api.memory.get('themeHighlight') || themeLight.highlight,
             text: api.memory.get('themeText') || themeLight.text,
             button: api.memory.get('themeButton') || themeLight.button
+        }
+    }
+
+    function swapTheme() {
+        if (darkThemeActive) {
+            darkThemeActive = false;
+            theme.main = themeLight.main;
+        } else {
+            darkThemeActive = true;
+            theme.main = themeDark.main;
         }
     }
 
@@ -206,10 +289,9 @@ FocusScope
         {
             left: parent.left; leftMargin: screenmargin
             right: parent.right; rightMargin: screenmargin
-            //top: parent.bott; topMargin: vpx(647)
             bottom: parent.bottom
         }
-        height: vpx(75)
+        height: helpbarheight
 
         Rectangle {
 
@@ -219,7 +301,7 @@ FocusScope
 
         Rectangle {
             anchors.left: parent.left; anchors.right: parent.right
-            height: vpx(1)
+            height: 1
             color: theme.secondary
         }
 
@@ -228,7 +310,7 @@ FocusScope
             width: parent.width
             height: parent.height
             anchors {
-                bottom: parent.bottom; bottomMargin: vpx(12)
+                bottom: parent.bottom;
             }
             showBack: !platformScreen.focus
         }

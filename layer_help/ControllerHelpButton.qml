@@ -16,13 +16,13 @@ FocusScope {
     sourceSize.height: vpx(32)
     transform: Rotation { origin.x: vpx(12); origin.y: vpx(12); angle: buttonRotation }
     anchors {
-      right: buttonText.left
+      right: bottomNavButtonText.left
       rightMargin: vpx(10)
     }
   }
 
   Item {
-    id: buttonText
+    id: bottomNavButtonText
     width: txt.width
     height: parent.height
     Text {
