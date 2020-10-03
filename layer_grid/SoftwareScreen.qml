@@ -363,7 +363,7 @@ FocusScope
                         height: Math.round(screenheight*gamesBubbleHeight)
                         color: "white"
                         radius: vpx(4)
-
+                        visible: !modelData.assets.logo
                         // Need to figure out how to stop it from clipping the margin
                         // mapFromItem and mapToItem are probably going to help
                         property int xpos: screenshot.width/2 - width/2
@@ -403,6 +403,7 @@ FocusScope
                         opacity: titleBubble.opacity
                         x: screenshot.width/2 - width/2
                         anchors.bottom: screenshot.top
+                        visible: !modelData.assets.logo
                     }
 
                     // Border

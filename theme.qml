@@ -15,15 +15,17 @@ FocusScope
     property var bottomNavButtonSize: 0.08
     property var bottomNavButtonText: 0.05
     
-    property var platformMarginTop: 0.2569
+    property var platformMarginTop: 0.15
     property var headerMarginTop: 0.0472
     property var headerLogo: 0.0833
-    property var headerTime: 0.0277
-    property var platformBox: 0.3555
+    property var headerTime: 0.04
+    property var platformBox: 0.55
+    
+    
     
     property var platformText: 0.025
-    property var selectedPlatformTitle: 0.03
-    property var platformBubbleBottom: 0.002
+    property var selectedPlatformTitle: 0.05
+    property var platformBubbleBottom: 0.02
     
     
     property var gamesHeaderHeight: 0.1222
@@ -34,8 +36,8 @@ FocusScope
     property var sc6: 0.6527
     property var sc7: 0.0194
     property var gamesBubbleHeight: 0.0611
-    property var gamesBubbleText: 0.0222
-    property var gamesBubbleTriangleHeight: 0.0152
+    property var gamesBubbleText: 0.0422
+    property var gamesBubbleTriangleHeight: 0.02
     
     property bool searchActive
     property string searchTerm: ""
