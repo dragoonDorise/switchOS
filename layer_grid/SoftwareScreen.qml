@@ -178,7 +178,7 @@ FocusScope
                         var restoreHighlightMoveDuration = highlightMoveDuration;                    
                         highlightMoveDuration = 0;
                         currentIndex = restoreGameIndex;
-                        positionViewAtIndex(currentIndex, ListView.Visible);                        
+                        positionViewAtIndex(currentIndex, GridView.Visible);                        
                         highlightMoveDuration = restoreHighlightMoveDuration;
                     }
                 }
