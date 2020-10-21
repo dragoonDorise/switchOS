@@ -78,7 +78,12 @@ FocusScope
             }
             if (api.keys.isFilters(event)) {
                 event.accepted = true;
-                toggleSearch();                
+                if (yTogglesDarkMode) {
+                    toggleDarkMode();
+                } else {
+                    toggleSearch();
+                }
+                
                 return;
             }
         }
@@ -165,13 +170,36 @@ FocusScope
             id: gameGrid
             focus: true
 
+            onVisibleChanged: {
+                if (visible && restorePosition) {
+                    var restoreGameIndex = api.memory.get('restoreGameIndex');
+                    api.memory.unset('restoreGameIndex');
+                    if (restoreGameIndex != undefined) {
+                        var restoreHighlightMoveDuration = highlightMoveDuration;                    
+                        highlightMoveDuration = 0;
+                        currentIndex = restoreGameIndex;
+                        positionViewAtIndex(currentIndex, ListView.Visible);                        
+                        highlightMoveDuration = restoreHighlightMoveDuration;
+                    }
+                }
+            }
+
             Keys.onPressed: {
                 if (api.keys.isAccept(event) && !event.isAutoRepeat) {
                     event.accepted = true;
-                    //currentItem.currentGame.launch();
-                    // launchGame();
+                    if (currentGameIndex != currentIndex) {
+                        // fixes issue where position is restored, then you go back,
+                        // then return to the same collection and start selected game,
+                        // the first game (#0) is run instead
+                        currentGameIndex = currentIndex;
+                    }
                     if (currentGame !== null) {
-                        currentGame.launch()
+                        launchSfx.play();
+                        if (restorePosition) {
+                            api.memory.set('restoreCollectionIndex', collectionIndex);
+                            api.memory.set('restoreGameIndex', currentGameIndex);
+                        }
+                        currentGame.launch();
                     }
                 }
             }
