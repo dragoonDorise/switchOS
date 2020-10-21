@@ -36,15 +36,50 @@ ListView {
     }
 
     Keys.onPressed: {
-         if (api.keys.isAccept(event) && !event.isAutoRepeat) {
+        if (event.isAutoRepeat) {
+            return;
+        }
+        if (api.keys.isAccept(event)) {
             event.accepted = true;
             gotoSoftware();
+            return;
         }
-
+        if (api.keys.isDetails(event)) {
+            event.accepted = true;
+            if (!yTogglesDarkMode) {
+                toggleDarkMode();
+            }
+            return;
+        }        
+        if (api.keys.isFilters(event)) {
+            event.accepted = true;
+            if (yTogglesDarkMode) {
+                toggleDarkMode();
+            }
+            return;
+        }
     }
 
     model: allCollections
     delegate: platformBarDelegate
+
+    Component.onCompleted: {
+
+        if (restorePosition) {
+            var restoreCollectionIndex = api.memory.get('restoreCollectionIndex');
+            api.memory.unset('restoreCollectionIndex');            
+            if (restoreCollectionIndex != undefined) {
+                var restoreHighlightMoveDuration = highlightMoveDuration;                    
+                highlightMoveDuration = 0;
+                currentIndex = restoreCollectionIndex;
+                positionViewAtIndex(currentIndex, ListView.Visible);
+                highlightMoveDuration = restoreHighlightMoveDuration;
+                collectionIndex = currentIndex;
+                setTimeout(showSoftwareScreenNoSfx, 100);
+            }
+        }
+
+    }      
 
     Component {
         id: platformBarDelegate
