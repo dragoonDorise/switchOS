@@ -5,13 +5,28 @@ import SortFilterProxyModel 0.2
 import QtMultimedia 5.9
 import "qrc:/qmlutils" as PegasusUtils
 import "utils.js" as Utils
-import "layer_platform"
+import "layer_platform" 
 import "layer_grid"
 import "layer_help"
 
 FocusScope
 {
     id: root
+
+
+    // options you might want to play with
+
+    property bool darkMode: true
+
+    property bool yTogglesDarkMode: true
+    
+    property bool restorePosition: true
+
+    property var masterVolume: 1.0
+
+    // end options
+
+
     property var bottomNavButtonSize: 0.08
     property var bottomNavButtonText: 0.05
     
@@ -49,7 +64,6 @@ FocusScope
     property real screenheight: height
     property bool widescreen: ((height/width) < 0.7)
     property real helpbarheight: Math.round(screenheight*0.1041) // Calculated manually based on mockup
-    property bool darkThemeActive
     property var allCollections: {
         let collections = api.collections.toVarArray()
         collections.unshift({"name": "Favorites", "shortName": "auto-favorites", "games": allFavorites})
@@ -111,6 +125,11 @@ FocusScope
         toSoftware.play();
     }
 
+    function showSoftwareScreenNoSfx()
+    {
+        softwareScreen.focus = true;
+    }    
+
     function showHomeScreen()
     {
         platformScreen.focus = true;
@@ -168,25 +187,54 @@ FocusScope
 
     // Do this properly later
     property var theme: {
+    	var mode = darkMode ? themeDark : themeLight;
         return {
-            main: api.memory.get('themeBG') || themeLight.main,
-            secondary: api.memory.get('themeSecondary') || themeLight.secondary,
-            accent: api.memory.get('themeAccent') || themeLight.accent,
-            highlight: api.memory.get('themeHighlight') || themeLight.highlight,
-            text: api.memory.get('themeText') || themeLight.text,
-            button: api.memory.get('themeButton') || themeLight.button
+            main: api.memory.get('themeBG') || mode.main,
+            secondary: api.memory.get('themeSecondary') || mode.secondary,
+            accent: api.memory.get('themeAccent') || mode.accent,
+            highlight: api.memory.get('themeHighlight') || mode.highlight,
+            text: api.memory.get('themeText') || mode.text,
+            button: api.memory.get('themeButton') || mode.button
         }
     }
 
-    function swapTheme() {
-        if (darkThemeActive) {
-            darkThemeActive = false;
+    function toggleDarkMode() {
+        if (darkMode) {
+            darkMode = false;
             theme.main = themeLight.main;
         } else {
-            darkThemeActive = true;
+            darkMode = true;
             theme.main = themeDark.main;
         }
+        api.memory.set('darkMode', darkMode);
     }
+
+    Timer {
+        id: timer
+        running: false
+        repeat: false
+        property var callback
+        onTriggered: callback()
+    }
+
+    function setTimeout(callback, delay)
+    {
+        if (!timer.running) {
+	        timer.callback = callback;
+	        timer.interval = delay + 1;
+	        timer.running = true;
+        }
+    }
+
+    Component.onCompleted: {
+        state: "platformscreen"
+        homeSfx.play()
+
+        var darkModeMemory = api.memory.get('darkMode');
+        if (darkModeMemory != undefined && darkModeMemory != darkMode) {
+        	toggleDarkMode();
+        }
+    }    
 
     // State settings
     states: [
@@ -248,12 +296,6 @@ FocusScope
         }
         color: theme.main
     }
-
-    Component.onCompleted: {
-        state: "platformscreen"
-        homeSfx.play()
-    }
-
 
     // Platform screen
     PlatformScreen
@@ -320,37 +362,37 @@ FocusScope
     SoundEffect {
       id: navSound
       source: "assets/audio/Klick.wav"
-      volume: 1.0
+      volume: masterVolume * 1.0
     }
 
     SoundEffect {
       id: toSoftware
       source: "assets/audio/EnterBack.wav"
-      volume: 1.0
+      volume: masterVolume * 1.0
     }
 
     SoundEffect {
       id: fillList
       source: "assets/audio/Icons.wav"
-      volume: 1.0
+      volume: masterVolume * 1.0
     }
 
     SoundEffect {
       id: backSfx
       source: "assets/audio/Nock.wav"
-      volume: 1.0
+      volume: masterVolume * 1.0
     }
 
     SoundEffect {
         id: launchSfx
         source: "assets/audio/PopupRunTitle.wav"
-        volume: 1.0
+        volume: masterVolume * 1.0
     }
 
     SoundEffect {
         id: homeSfx
         source: "assets/audio/Home.wav"
-        volume: 1.0
+        volume: masterVolume * 1.0
     }
 
 }
